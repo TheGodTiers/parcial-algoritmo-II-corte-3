@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Administrador de Tareas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body class="w3-content" style="max-width:1300px">
+
+    <div class="w3-row">
+        <div class="w3-half w3-black w3-container w3-center" style="height:700px">
+            <div class="w3-padding-64">
+                <h1>Administrador de Tareas</h1>
+            </div>
+            <div class="w3-padding-64">
+                <a href="/" class="w3-button w3-black w3-block w3-hover-blue-grey w3-padding-16" aria-label="Home">Home</a>
+                {% if not has_root %}
+                    <a href="{{ url_for('add_root') }}" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16" aria-label="Agregar Proyecto">Agregar Proyecto</a>
+                {% endif %}
+                {% if has_root %}
+                    <a href="{{ url_for('view_project') }}" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16" aria-label="Ver Proyecto">Ver Proyecto</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="w3-half w3-blue-grey w3-container" style="height:700px">
+            <div class="w3-padding-64 w3-center">
+                <h1>¿Cómo Funciona?</h1>
+                <img src="https://carrerasymas.com/wp-content/uploads/2022/05/20945988-scaled-1.jpg" class="w3-margin w3-circle" alt="Person" style="width:50%">
+                <div class="w3-left-align w3-padding-large">
+                    <p>Esta aplicación te permite gestionar tus tareas de forma eficiente. Puedes agregar, buscar y eliminar tareas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="w3-container w3-black w3-padding-16">
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    </footer>
+</body>
+</html>

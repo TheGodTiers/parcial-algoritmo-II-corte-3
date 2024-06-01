@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados de Búsqueda</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body class="w3-content" style="max-width:1300px">
+    <div class="w3-row">
+        <div class="w3-half w3-light-grey w3-container" style="min-height:800px">
+            <div class="w3-padding-64 w3-center">
+                <h2>Resultados de Búsqueda para "{{ query }}"</h2>
+                {% if results %}
+                    <ul class="w3-ul">
+                        {% for task in results %}
+                            <li>
+                                <strong>{{ task.name }}</strong> - {{ task.due_date }}<br>
+                                Etiquetas: {{ task.tags | join(', ') }}<br>
+                                Notas: {{ task.notes }}
+                                <form class="w3-container" action="/eliminar" method="POST" style="display:inline;">
+                                    <input type="hidden" name="task_name" value="{{ task.name }}">
+                                    <button type="submit" class="w3-button w3-red">Eliminar</button>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No se encontraron tareas que coincidan con "{{ query }}"</p>
+                {% endif %}
+                <a href="/search" class="w3-button w3-black w3-margin-top">Volver a Buscar</a>
+                <a href="/view-project" class="w3-button w3-black w3-margin-top">Volver al Proyecto</a>
+                <a href="/" class="w3-button w3-black w3-margin-top">Volver al Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ver Proyecto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body class="w3-content" style="max-width:1300px">
+    <div class="w3-row">
+        <div class="w3-half w3-light-grey w3-container" style="min-height:800px">
+            <div class="w3-padding-64 w3-center">
+                <h2>Proyecto: {{ project.name }}</h2>
+                <p>Fecha de Vencimiento: {{ project.due_date }}</p>
+                <p>Etiquetas: {{ project.tags | join(', ') }}</p>
+                <p>Notas: {{ project.notes }}</p>
+                <h2>Agregar Tarea</h2>
+                <form class="w3-container" action="/view-project" method="POST">
+                    <div class="w3-section">
+                        <label for="nombre">Nombre</label>
+                        <input class="w3-input" style="width:100%;" type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="w3-section">
+                        <label for="fecha">Fecha de Vencimiento</label>
+                        <input class="w3-input" style="width:100%;" type="date" id="fecha" name="fecha" required>
+                    </div>
+                    <div class="w3-section">
+                        <label for="etiquetas">Etiquetas</label>
+                        <input class="w3-input" style="width:100%;" type="text" id="etiquetas" name="etiquetas">
+                    </div>
+                    <div class="w3-section">
+                        <label for="notas">Notas</label>
+                        <textarea class="w3-input" style="width:100%;" id="notas" name="notas"></textarea>
+                    </div>
+                    <div class="w3-section">
+                        <label for="priority">Prioridad</label>
+                        <select class="w3-select" id="priority" name="priority">
+                            <option value="alta">Alta</option>
+                            <option value="baja">Baja</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w3-button w3-black w3-right">Agregar</button>
+                </form>
+                <a href="/" class="w3-button w3-black w3-margin-top">Volver al Home</a>
+            </div>
+        </div>
+        <div class="w3-half w3-white w3-container" style="min-height:800px">
+            <div class="w3-padding-64 w3-center">
+                <h2>Buscar Tareas</h2>
+                <form class="w3-container" action="/search" method="POST">
+                    <input class="w3-input" style="width:80%; display:inline-block;" type="text" id="query" name="query" required>
+                    <button type="submit" class="w3-button w3-black" style="display:inline-block;">Buscar</button>
+                </form>
+                <h2>Tareas</h2>
+                {% if tasks %}
+                    <ul class="w3-ul">
+                        {% for task in tasks %}
+                            <li>
+                                <strong>{{ task.name }}</strong> - {{ task.due_date }}<br>
+                                Etiquetas: {{ task.tags | join(', ') }}<br>
+                                Notas: {{ task.notes }}<br>
+                                Prioridad: {{ task.priority }}<br>
+                                <form class="w3-container" action="/eliminar" method="POST" style="display:inline;">
+                                    <input type="hidden" name="task_name" value="{{ task.name }}">
+                                    <button type="submit" class="w3-button w3-red">Eliminar</button>
+                                    <button type="submit" class="w3-button w3-black w3-right">Agregar</button>
+                                    <a href="/" class="w3-button w3-black w3-margin-top">Volver al Home</a>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No hay tareas disponibles.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

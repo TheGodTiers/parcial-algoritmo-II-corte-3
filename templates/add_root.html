@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agregar Proyecto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body class="w3-content" style="max-width:1300px">
+    <div class="w3-row">
+        <div class="w3-half w3-light-grey w3-container" style="min-height:800px" id="add-root">
+            <div class="w3-padding-64 w3-center">
+                <h2>Agregar Proyecto</h2>
+                <form class="w3-container" action="/add-root" method="POST" onsubmit="return validateForm()">
+                    <div class="w3-section">
+                        <label for="nombre">Nombre</label>
+                        <input class="w3-input" style="width:100%;" type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="w3-section">
+                        <label for="fecha">Fecha de Vencimiento</label>
+                        <input class="w3-input" style="width:100%;" type="date" id="fecha" name="fecha" required>
+                        <span id="fecha-error" class="error"></span>
+                    </div>
+                    <div class="w3-section">
+                        <label for="etiquetas">Etiquetas</label>
+                        <input class="w3-input" style="width:100%;" type="text" id="etiquetas" name="etiquetas">
+                    </div>
+                    <div class="w3-section">
+                        <label for="notas">Notas</label>
+                        <textarea class="w3-input" style="width:100%;" id="notas" name="notas"></textarea>
+                    </div>
+                    <button type="submit" class="w3-button w3-black w3-right">Agregar</button>
+                </form>
+                <a href="/" class="w3-button w3-black w3-margin-top">Volver al Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var fecha = document.getElementById('fecha').value;
+            var fechaError = document.getElementById('fecha-error');
+            var year = fecha.split('-')[0];
+
+            if (year.length !== 4) {
+                fechaError.textContent = 'El año debe tener 4 dígitos.';
+                return false;
+            } else {
+                fechaError.textContent = '';
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
